@@ -6,7 +6,7 @@
 
 A high-performance portfolio website built with React 18, Vite, and Tailwind CSS, featuring modern UI/UX design with dark/light mode, smooth animations, and full responsiveness.
 
-![Portfolio Preview](./src/assets/img/personalWebsite.png)
+![Portfolio Preview](./src/assets/img/personalWebsites.png)
 
 ## 🚀 Features
 
