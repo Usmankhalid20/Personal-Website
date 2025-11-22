@@ -1,13 +1,13 @@
 import NoteApp from '../assets/img/noteApp.PNG'
 import FoodWebsite from '../assets/img/foodWebsite.PNG'
 import Crud from '../assets/img/crudOperation.PNG'
-import Personal from '../assets/img/personalWebsites.PNG'
 import Netflix from '../assets/img/netifix.PNG'
 import FullWebsite from '../assets/img/fullWebsite.PNG'
+
 const projects = [
   {
     title: 'Note App',
-    description: 'A full-featured note-taking application built with MERN stack (MongoDB, Express, React, Node.js) with CRUD functionality and user authentication.',
+    description: 'A full-featured note-taking application built with MERN stack. Implemented secure user authentication with JWT, efficient data storage with MongoDB, and a responsive UI with drag-and-drop functionality for better user experience.',
     technologies: ['React', 'Node.js', 'Express', 'MongoDB', 'JWT'],
     github: 'https://github.com/Usmankhalid20/Note-APP-MERN-Stack',
     demo: 'https://note-app-demo.com',
@@ -17,7 +17,7 @@ const projects = [
   },
   {
     title: 'Food Website',
-    description: 'Interactive food ordering platform with menu browsing, cart functionality, and admin dashboard built with MERN stack.',
+    description: 'Interactive food ordering platform handling complex API calls for recipe data. Designed a scalable component structure to support future feature integration and managed global state with Redux for a seamless shopping cart experience.',
     technologies: ['React', 'Node.js', 'Express', 'MongoDB', 'Redux'],
     github: 'https://github.com/Usmankhalid20/Food-Recipe-Website',
     demo: 'https://food-website-demo.com',
@@ -33,15 +33,6 @@ const projects = [
     demo: 'https://crud-app-demo.com',
     image: Crud,
     category: 'Full Stack'
-  },
-  {
-    title: 'Personal Portfolio',
-    description: 'Professional portfolio website showcasing my projects and skills, built with React and modern CSS.',
-    technologies: ['React', 'Tailwind CSS', 'Framer Motion', 'Vite'],
-    github: 'https://github.com/Usmankhalid20/Personal-Website',
-    demo: 'https://yourportfolio.com',
-    image: Personal,
-    category: 'Web Development'
   },
   {
     title: 'Netflix Clone',
