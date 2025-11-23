@@ -2,7 +2,7 @@ import { motion } from 'framer-motion';
 import { Link } from 'react-scroll';
 import { FaLinkedin, FaGithub, FaBehance, FaDownload } from "react-icons/fa";
 import Resume from '../assets/resume/Usman_Khalid_CV.pdf';
-import profile from "../../src/assets/img/profileImage.jpeg";
+import profile from "../assets/img/profileImage.jpeg";
 import GravityBackground from './GravityBackground';
 import SplitText from './SplitText';
 import MagneticButton from './MagneticButton';
