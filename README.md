@@ -8,7 +8,7 @@
 
 > A premium, high-performance portfolio website built with **React 19**, **Vite**, and **Tailwind CSS v4**. Featuring a sophisticated **Sea Blue & Black** aesthetic, smooth **Framer Motion** animations, and a custom photography showcase.
 
-![Portfolio Preview](./public/assets/img/personalWebsites.png)
+![Portfolio Preview](src/assets/img/PersonalWebsite.png)
 
 ## � Table of Contents
 
