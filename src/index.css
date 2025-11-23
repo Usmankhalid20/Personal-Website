@@ -5,34 +5,33 @@
 @theme {
   --font-sans: "Outfit", sans-serif;
 
-  /* Midnight Luxe Palette */
-  /* Primary - Royal Blue / Indigo */
-  --color-primary-50: #eff6ff;
-  --color-primary-100: #dbeafe;
-  --color-primary-200: #bfdbfe;
-  --color-primary-300: #93c5fd;
-  --color-primary-400: #60a5fa;
-  --color-primary-500: #3b82f6;
-  --color-primary-600: #2563eb;
-  --color-primary-700: #1d4ed8;
-  --color-primary-800: #1e40af;
-  --color-primary-900: #1e3a8a;
+  /* Sea Blue Palette - Sophisticated & Professional */
+  --color-primary-50: #f0f9ff;
+  --color-primary-100: #e0f2fe;
+  --color-primary-200: #bae6fd;
+  --color-primary-300: #7dd3fc;
+  --color-primary-400: #38bdf8;
+  --color-primary-500: #006994; /* Sea Blue - Main Accent */
+  --color-primary-600: #0284c7;
+  --color-primary-700: #0369a1;
+  --color-primary-800: #075985;
+  --color-primary-900: #0c4a6e;
 
-  /* Secondary - Slate (Deep Blue-Grey) */
-  --color-secondary-50: #f8fafc;
-  --color-secondary-100: #f1f5f9;
-  --color-secondary-200: #e2e8f0;
-  --color-secondary-300: #cbd5e1;
-  --color-secondary-400: #94a3b8;
-  --color-secondary-500: #64748b;
-  --color-secondary-600: #475569;
-  --color-secondary-700: #334155;
-  --color-secondary-800: #1e293b;
-  --color-secondary-900: #0f172a;
+  /* Neutral Grays - Clean & Modern */
+  --color-secondary-50: #f9fafb;
+  --color-secondary-100: #f3f4f6;
+  --color-secondary-200: #e5e7eb;
+  --color-secondary-300: #d1d5db;
+  --color-secondary-400: #9ca3af;
+  --color-secondary-500: #6b7280;
+  --color-secondary-600: #4b5563;
+  --color-secondary-700: #374151;
+  --color-secondary-800: #1f2937;
+  --color-secondary-900: #111827;
 
-  /* Accent - Amber / Gold */
-  --color-accent: #f59e0b;
-  --color-accent-glow: rgba(245, 158, 11, 0.5);
+  /* Accent - Sea Blue */
+  --color-accent: #006994;
+  --color-accent-glow: rgba(0, 105, 148, 0.5);
 }
 
 :root {
@@ -47,12 +46,21 @@ html {
 body {
   font-family: "Outfit", sans-serif;
   overflow-x: hidden;
-  /* Default to dark mode look for "Midnight Luxe" feel even in light mode, or handle strictly via dark class */
-  @apply bg-secondary-50 text-secondary-900 dark:bg-secondary-900 dark:text-secondary-50 transition-colors duration-300;
+  /* Light Mode: Pure White Background, Dark Gray Text */
+  /* Dark Mode: Deep Black Background, White Text */
+  @apply bg-white text-gray-900 dark:bg-black dark:text-white transition-colors duration-300;
 }
 
+/* Text Selection - Sea Blue */
+/* This section was already correct and didn't cause warnings */
 ::selection {
-  @apply bg-primary-500/30 text-primary-900 dark:text-white;
+  background-color: var(--color-primary-500);
+  color: white;
+}
+
+.dark ::selection {
+  background-color: var(--color-primary-500);
+  color: white;
 }
 
 /* Custom Scrollbar */
@@ -60,10 +68,26 @@ body {
   width: 10px;
 }
 
+/* --- REVISED: Use standard CSS for scrollbar track to avoid the :where() wrapper --- */
 ::-webkit-scrollbar-track {
-  @apply bg-secondary-100 dark:bg-secondary-800;
+  background-color: var(--color-secondary-100); /* Equivalent to bg-gray-100 */
+}
+.dark ::-webkit-scrollbar-track {
+  background-color: var(--color-secondary-900); /* Equivalent to dark:bg-gray-900 */
 }
 
+/* --- REVISED: Use standard CSS for scrollbar thumb --- */
 ::-webkit-scrollbar-thumb {
-  @apply bg-secondary-300 dark:bg-secondary-600 rounded-full hover:bg-secondary-400 dark:hover:bg-secondary-500 transition-colors;
+  background-color: var(--color-secondary-400); /* Equivalent to bg-gray-400 */
+  border-radius: 9999px; /* Equivalent to rounded-full */
+  transition: background-color 0.3s ease;
+}
+
+.dark ::-webkit-scrollbar-thumb {
+  background-color: var(--color-secondary-700); /* Equivalent to dark:bg-gray-700 */
+}
+
+/* --- REVISED: Use standard CSS for hover state --- */
+::-webkit-scrollbar-thumb:hover {
+  background-color: var(--color-primary-500); /* Equivalent to hover:bg-primary-500 */
 }

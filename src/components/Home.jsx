@@ -2,7 +2,7 @@ import { motion } from 'framer-motion';
 import { Link } from 'react-scroll';
 import { FaLinkedin, FaGithub, FaBehance, FaDownload } from "react-icons/fa";
 import Resume from '../assets/resume/Usman_Khalid_CV.pdf';
-import profile from '../assets/img/Profile.png';
+import profile from "../assets/img/ProfileImage.jpeg"
 import GravityBackground from './GravityBackground';
 import SplitText from './SplitText';
 import MagneticButton from './MagneticButton';
@@ -139,67 +139,22 @@ export default function Home() {
           {/* Glass Card Background for Image */}
           <div className="absolute inset-0 bg-gradient-to-tr from-primary-500/10 to-secondary-500/10 rounded-full blur-3xl transform rotate-12 scale-110" />
           
-          <div className="relative w-72 h-72 sm:w-96 sm:h-96 md:w-[500px] md:h-[500px]">
-            <svg
-              className="absolute w-full h-full drop-shadow-2xl"
-              viewBox="0 0 479 467"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <defs>
-                <linearGradient id="blobGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-                  <stop offset="0%" stopColor="var(--color-primary-600)" stopOpacity="0.9" />
-                  <stop offset="100%" stopColor="var(--color-accent)" stopOpacity="0.9" />
-                </linearGradient>
-                <clipPath id="blobClip">
-                  <motion.path
-                    initial={{ d: "M9.19024 145.964C34.0253 76.5814 114.865 54.7299 184.111 29.4823C245.804 6.98884 311.86 -14.9503 370.735 14.143C431.207 44.026 467.948 107.508 477.191 174.311C485.897 237.229 454.931 294.377 416.506 344.954C373.74 401.245 326.068 462.801 255.442 466.189C179.416 469.835 111.552 422.137 65.1576 361.805C17.4835 299.81 -17.1617 219.583 9.19024 145.964Z" }}
-                    animate={{ 
-                      d: [
-                        "M9.19024 145.964C34.0253 76.5814 114.865 54.7299 184.111 29.4823C245.804 6.98884 311.86 -14.9503 370.735 14.143C431.207 44.026 467.948 107.508 477.191 174.311C485.897 237.229 454.931 294.377 416.506 344.954C373.74 401.245 326.068 462.801 255.442 466.189C179.416 469.835 111.552 422.137 65.1576 361.805C17.4835 299.81 -17.1617 219.583 9.19024 145.964Z",
-                        "M30.19024 125.964C54.0253 56.5814 134.865 34.7299 204.111 19.4823C265.804 -3.01116 331.86 -4.9503 390.735 24.143C451.207 54.026 487.948 117.508 497.191 184.311C505.897 247.229 474.931 304.377 436.506 354.954C393.74 411.245 346.068 472.801 275.442 476.189C199.416 479.835 131.552 432.137 85.1576 371.805C37.4835 309.81 3.8383 229.583 30.19024 125.964Z",
-                        "M9.19024 145.964C34.0253 76.5814 114.865 54.7299 184.111 29.4823C245.804 6.98884 311.86 -14.9503 370.735 14.143C431.207 44.026 467.948 107.508 477.191 174.311C485.897 237.229 454.931 294.377 416.506 344.954C373.74 401.245 326.068 462.801 255.442 466.189C179.416 469.835 111.552 422.137 65.1576 361.805C17.4835 299.81 -17.1617 219.583 9.19024 145.964Z"
-                      ]
-                    }}
-                    transition={{ 
-                      duration: 10, 
-                      repeat: Infinity, 
-                      ease: "easeInOut" 
-                    }}
-                  />
-                </clipPath>
-              </defs>
-              
-              {/* Background Blob */}
-              <motion.path
-                initial={{ d: "M9.19024 145.964C34.0253 76.5814 114.865 54.7299 184.111 29.4823C245.804 6.98884 311.86 -14.9503 370.735 14.143C431.207 44.026 467.948 107.508 477.191 174.311C485.897 237.229 454.931 294.377 416.506 344.954C373.74 401.245 326.068 462.801 255.442 466.189C179.416 469.835 111.552 422.137 65.1576 361.805C17.4835 299.81 -17.1617 219.583 9.19024 145.964Z" }}
-                animate={{ 
-                  d: [
-                    "M9.19024 145.964C34.0253 76.5814 114.865 54.7299 184.111 29.4823C245.804 6.98884 311.86 -14.9503 370.735 14.143C431.207 44.026 467.948 107.508 477.191 174.311C485.897 237.229 454.931 294.377 416.506 344.954C373.74 401.245 326.068 462.801 255.442 466.189C179.416 469.835 111.552 422.137 65.1576 361.805C17.4835 299.81 -17.1617 219.583 9.19024 145.964Z",
-                    "M30.19024 125.964C54.0253 56.5814 134.865 34.7299 204.111 19.4823C265.804 -3.01116 331.86 -4.9503 390.735 24.143C451.207 54.026 487.948 117.508 497.191 184.311C505.897 247.229 474.931 304.377 436.506 354.954C393.74 411.245 346.068 472.801 275.442 476.189C199.416 479.835 131.552 432.137 85.1576 371.805C37.4835 309.81 3.8383 229.583 30.19024 125.964Z",
-                    "M9.19024 145.964C34.0253 76.5814 114.865 54.7299 184.111 29.4823C245.804 6.98884 311.86 -14.9503 370.735 14.143C431.207 44.026 467.948 107.508 477.191 174.311C485.897 237.229 454.931 294.377 416.506 344.954C373.74 401.245 326.068 462.801 255.442 466.189C179.416 469.835 111.552 422.137 65.1576 361.805C17.4835 299.81 -17.1617 219.583 9.19024 145.964Z"
-                  ]
-                }}
-                transition={{ 
-                  duration: 10, 
-                  repeat: Infinity, 
-                  ease: "easeInOut" 
-                }}
-                fill="url(#blobGradient)"
-                className="transition-colors duration-300"
-              />
-              
-              {/* Profile Image */}
-              <image
-                href={profile}
-                // src={profile}
-                x="0"
-                y="0"
-                width="100%"
-                height="100%"
-                preserveAspectRatio="xMidYMid slice"
-                clipPath="url(#blobClip)"
-              />
-            </svg>
+          {/* Profile Image with Blob Shape */}
+          <div 
+            className="relative w-72 h-72 sm:w-96 sm:h-96 md:w-[500px] md:h-[500px] overflow-hidden drop-shadow-2xl"
+            style={{
+              clipPath: "polygon(30% 0%, 70% 0%, 100% 30%, 100% 70%, 70% 100%, 30% 100%, 0% 70%, 0% 30%)",
+              borderRadius: "30% 70% 70% 30% / 30% 30% 70% 70%"
+            }}
+          >
+            <img
+              src={profile}
+              alt="Usman Khalid"
+              className="w-full h-full object-cover"
+              style={{
+                objectPosition: "center -5%"
+              }}
+            />
           </div>
         </motion.div>
       </div>

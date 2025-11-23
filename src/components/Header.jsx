@@ -29,7 +29,7 @@ export default function Header() {
   return (
     <header 
       className={`fixed w-full top-0 z-50 transition-all duration-300 ${
-        scrolled ? 'bg-white/80 dark:bg-secondary-900/80 backdrop-blur-md shadow-lg' : 'bg-transparent'
+        scrolled ? 'bg-white/80 dark:bg-black/80 backdrop-blur-md shadow-lg' : 'bg-transparent'
       }`}
     >
       <nav className="max-w-7xl mx-auto px-6 sm:px-12 h-20 flex items-center justify-between">
@@ -49,7 +49,7 @@ export default function Header() {
                 to={link.to}
                 smooth={true}
                 duration={500}
-                className="text-secondary-600 dark:text-secondary-300 hover:text-primary-500 dark:hover:text-primary-400 font-medium cursor-pointer transition-colors"
+                className="text-gray-600 dark:text-gray-300 hover:text-primary-500 dark:hover:text-primary-400 font-medium cursor-pointer transition-colors"
               >
                 {link.name}
               </ScrollLink>
@@ -57,7 +57,7 @@ export default function Header() {
           ) : (
             <RouterLink
               to="/"
-              className="text-secondary-600 dark:text-secondary-300 hover:text-primary-500 dark:hover:text-primary-400 font-medium cursor-pointer transition-colors"
+              className="text-gray-600 dark:text-gray-300 hover:text-primary-500 dark:hover:text-primary-400 font-medium cursor-pointer transition-colors"
             >
               Home
             </RouterLink>
@@ -68,7 +68,7 @@ export default function Header() {
             className={`font-medium transition-colors ${
               location.pathname === '/photography' 
                 ? 'text-primary-500 dark:text-primary-400' 
-                : 'text-secondary-600 dark:text-secondary-300 hover:text-primary-500 dark:hover:text-primary-400'
+                : 'text-gray-600 dark:text-gray-300 hover:text-primary-500 dark:hover:text-primary-400'
             }`}
           >
             Photography
@@ -82,7 +82,7 @@ export default function Header() {
         <div className="md:hidden flex items-center gap-4">
           <DarkModeToggle />
           <button 
-            className="text-2xl text-secondary-800 dark:text-white"
+            className="text-2xl text-gray-800 dark:text-white"
             onClick={() => setIsOpen(!isOpen)}
           >
             {isOpen ? <FaTimes /> : <FaBars />}
@@ -91,7 +91,7 @@ export default function Header() {
 
         {/* Mobile Menu */}
         {isOpen && (
-          <div className="absolute top-20 left-0 w-full bg-white dark:bg-secondary-900 border-t border-secondary-100 dark:border-secondary-800 shadow-xl md:hidden">
+          <div className="absolute top-20 left-0 w-full bg-white dark:bg-black border-t border-gray-100 dark:border-gray-800 shadow-xl md:hidden">
             <div className="flex flex-col p-6 gap-4">
               {isHomePage ? (
                 navLinks.map((link) => (
@@ -101,7 +101,7 @@ export default function Header() {
                     smooth={true}
                     duration={500}
                     onClick={() => setIsOpen(false)}
-                    className="text-secondary-600 dark:text-secondary-300 hover:text-primary-500 dark:hover:text-primary-400 font-medium cursor-pointer transition-colors"
+                    className="text-gray-600 dark:text-gray-300 hover:text-primary-500 dark:hover:text-primary-400 font-medium cursor-pointer transition-colors"
                   >
                     {link.name}
                   </ScrollLink>
@@ -110,7 +110,7 @@ export default function Header() {
                 <RouterLink
                   to="/"
                   onClick={() => setIsOpen(false)}
-                  className="text-secondary-600 dark:text-secondary-300 hover:text-primary-500 dark:hover:text-primary-400 font-medium cursor-pointer transition-colors"
+                  className="text-gray-600 dark:text-gray-300 hover:text-primary-500 dark:hover:text-primary-400 font-medium cursor-pointer transition-colors"
                 >
                   Home
                 </RouterLink>
@@ -121,7 +121,7 @@ export default function Header() {
                 className={`font-medium transition-colors ${
                   location.pathname === '/photography' 
                     ? 'text-primary-500 dark:text-primary-400' 
-                    : 'text-secondary-600 dark:text-secondary-300 hover:text-primary-500 dark:hover:text-primary-400'
+                    : 'text-gray-600 dark:text-gray-300 hover:text-primary-500 dark:hover:text-primary-400'
                 }`}
               >
                 Photography
