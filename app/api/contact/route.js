@@ -2,6 +2,8 @@ import { NextResponse } from 'next/server';
 import dbConnect from '../../../lib/mongodb';
 import Contact from '../../../models/Contact';
 
+const WEB3FORMS_ACCESS_KEY = process.env.VITE_WEB3FORMS_ACCESS_KEY;
+
 export async function POST(request) {
   try {
     const body = await request.json();
@@ -15,30 +17,40 @@ export async function POST(request) {
     }
 
     // 1. Send email via Web3Forms
-    const web3FormsPayload = {
-      access_key: process.env.WEB3FORMS_ACCESS_KEY,
-      name,
-      email,
-      phone: phone || '',
-      message,
-      subject: `New Project Inquiry from ${name}`,
-      from_name: name,
-    };
+    try {
+      const web3FormsPayload = {
+        access_key: WEB3FORMS_ACCESS_KEY,
+        name,
+        email,
+        phone: phone || '',
+        message,
+        subject: `New Project Inquiry from ${name}`,
+        from_name: name,
+      };
 
-    const web3Response = await fetch('https://api.web3forms.com/submit', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        Accept: 'application/json',
-      },
-      body: JSON.stringify(web3FormsPayload),
-    });
+      const web3Response = await fetch('https://api.web3forms.com/submit', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Accept: 'application/json',
+        },
+        body: JSON.stringify(web3FormsPayload),
+      });
 
-    const web3Result = await web3Response.json();
-
-    if (!web3Result.success) {
-      console.error('Web3Forms error:', web3Result);
-      // Don't block the user if email fails, still try to save to DB
+      // Safely parse — only attempt JSON if response is actually JSON
+      const contentType = web3Response.headers.get('content-type') || '';
+      if (contentType.includes('application/json')) {
+        const web3Result = await web3Response.json();
+        if (!web3Result.success) {
+          console.error('Web3Forms returned error:', web3Result);
+        }
+      } else {
+        const text = await web3Response.text();
+        console.error('Web3Forms returned non-JSON response:', text.substring(0, 200));
+      }
+    } catch (web3Error) {
+      // Email failure should not block saving to DB
+      console.error('Web3Forms request failed:', web3Error.message);
     }
 
     // 2. Save to MongoDB Atlas
@@ -46,7 +58,7 @@ export async function POST(request) {
     const newContact = await Contact.create({
       name,
       email,
-      phone,
+      phone: phone || '',
       message,
     });
 
