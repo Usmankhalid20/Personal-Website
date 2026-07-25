@@ -12,8 +12,8 @@ export default function HomePage() {
       <HomeHero />
       <About />
       <ExperienceSection />
-      <Work />
       <Skills />
+      <Work />
       <Contact />
     </main>
   );
