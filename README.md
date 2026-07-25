@@ -9,7 +9,7 @@
 
 > A premium, high-performance portfolio website built with **Next.js (App Router)**, **React 19**, and **Tailwind CSS v4**. Featuring a sophisticated **Sea Blue & Black** aesthetic, smooth **Framer Motion** animations, a fully functional contact form powered by **Web3Forms**, and data persistence with **MongoDB Atlas**.
 
-![Portfolio Preview](public/img/PersonalWebsite.png)
+<!-- ![Portfolio Preview](public/img/PersonalWebsite.png) -->
 
 ## 📖 Table of Contents
 
@@ -54,15 +54,15 @@
 
 ## 🛠 Tech Stack
 
-| Category       | Technology                                                 | Purpose                                |
-| -------------- | ---------------------------------------------------------- | -------------------------------------- |
-| **Framework**  | [Next.js](https://nextjs.org/)                             | React Framework (App Router)           |
-| **Core**       | [React 19](https://react.dev/)                             | UI Library                             |
-| **Database**   | [MongoDB Atlas](https://www.mongodb.com/)                  | Cloud Database (Contact Submissions)   |
-| **Emails**     | [Web3Forms](https://web3forms.com/)                        | Form Email Notifications               |
-| **Styling**    | [Tailwind CSS v4](https://tailwindcss.com/)                | Utility-first CSS                      |
-| **Animations** | [Framer Motion](https://www.framer.com/motion/)            | Complex Animations & Gestures          |
-| **Icons**      | [React Icons](https://react-icons.github.io/react-icons/)  | SVG Icon Library                       |
+| Category       | Technology                                                | Purpose                              |
+| -------------- | --------------------------------------------------------- | ------------------------------------ |
+| **Framework**  | [Next.js](https://nextjs.org/)                            | React Framework (App Router)         |
+| **Core**       | [React 19](https://react.dev/)                            | UI Library                           |
+| **Database**   | [MongoDB Atlas](https://www.mongodb.com/)                 | Cloud Database (Contact Submissions) |
+| **Emails**     | [Web3Forms](https://web3forms.com/)                       | Form Email Notifications             |
+| **Styling**    | [Tailwind CSS v4](https://tailwindcss.com/)               | Utility-first CSS                    |
+| **Animations** | [Framer Motion](https://www.framer.com/motion/)           | Complex Animations & Gestures        |
+| **Icons**      | [React Icons](https://react-icons.github.io/react-icons/) | SVG Icon Library                     |
 
 ---
 
@@ -95,6 +95,7 @@ Follow these steps to set up the project locally.
 3. **Set up Environment Variables**
 
    Create a `.env` file in the root directory and add your credentials:
+
    ```env
    WEB3FORMS_ACCESS_KEY="your_web3forms_key_here"
    MONGODB_URI="mongodb+srv://<username>:<password>@cluster0.mongodb.net/portfolio"
