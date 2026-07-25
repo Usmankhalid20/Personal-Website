@@ -1,16 +1,17 @@
 # ⚡ Modern Developer Portfolio
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
+[![Next.js](https://img.shields.io/badge/Next.js-15.0.0-black)](https://nextjs.org/)
 [![React](https://img.shields.io/badge/React-19.0.0-%2361DAFB)](https://react.dev/)
-[![Vite](https://img.shields.io/badge/Vite-6.0.0-%646CFF)](https://vitejs.dev/)
 [![Tailwind CSS](https://img.shields.io/badge/Tailwind-4.0.0-%2338B2AC)](https://tailwindcss.com/)
-[![Framer Motion](https://img.shields.io/badge/Framer_Motion-10.0.0-black)](https://www.framer.com/motion/)
+[![Framer Motion](https://img.shields.io/badge/Framer_Motion-11.0.0-black)](https://www.framer.com/motion/)
+[![MongoDB](https://img.shields.io/badge/MongoDB-Atlas-%2347A248)](https://www.mongodb.com/)
 
-> A premium, high-performance portfolio website built with **React 19**, **Vite**, and **Tailwind CSS v4**. Featuring a sophisticated **Sea Blue & Black** aesthetic, smooth **Framer Motion** animations, and a custom photography showcase.
+> A premium, high-performance portfolio website built with **Next.js (App Router)**, **React 19**, and **Tailwind CSS v4**. Featuring a sophisticated **Sea Blue & Black** aesthetic, smooth **Framer Motion** animations, a fully functional contact form powered by **Web3Forms**, and data persistence with **MongoDB Atlas**.
 
-![Portfolio Preview](src/assets/img/PersonalWebsite.png)
+![Portfolio Preview](public/img/PersonalWebsite.png)
 
-## � Table of Contents
+## 📖 Table of Contents
 
 - [Features](#-features)
 - [Tech Stack](#-tech-stack)
@@ -35,18 +36,19 @@
 
 ### ✨ Animations & Interactivity
 
-- **Gravity Background**: A physics-based particle system using `Matter.js` that reacts to device orientation and gravity.
-- **Photography Stack**: A Tinder-style swipeable card stack for showcasing photography, built with `Framer Motion` drag gestures.
+- **Scroll Progress & Page Transitions**: Smooth, animated transitions between sections and pages.
 - **Magnetic Buttons**: Interactive buttons that magnetically stick to the cursor movement.
 - **Scroll Reveals**: Elements fade in, slide up, and stagger as you scroll down the page.
-- **Split Text**: Character-by-character text reveal animations for impactful headlines.
+- **Split Text & Typewriter**: Character-by-character text reveal animations for impactful headlines.
+- **Experience Timeline**: A beautifully animated timeline showcasing professional experience.
 
-### ⚡ Performance & Tech
+### ⚡ Performance & Backend
 
-- **Instant Load**: Powered by **Vite** for sub-second development server start and optimized production builds.
-- **React 19**: Utilizing the latest React features for optimal rendering performance.
+- **Next.js App Router**: Server-side rendering (SSR) and optimized routing for lightning-fast performance.
+- **Web3Forms Integration**: Fully functional contact form that sends email notifications instantly.
+- **MongoDB Atlas**: Securely saves all contact form submissions to a cloud database.
 - **Tailwind v4**: The latest engine for zero-runtime CSS generation.
-- **SEO Optimized**: Semantic HTML5 structure and proper meta tags.
+- **SEO Optimized**: Semantic HTML5 structure and robust metadata handling.
 
 ---
 
@@ -54,14 +56,13 @@
 
 | Category       | Technology                                                 | Purpose                                |
 | -------------- | ---------------------------------------------------------- | -------------------------------------- |
+| **Framework**  | [Next.js](https://nextjs.org/)                             | React Framework (App Router)           |
 | **Core**       | [React 19](https://react.dev/)                             | UI Library                             |
-| **Build Tool** | [Vite](https://vitejs.dev/)                                | Bundler & Dev Server                   |
+| **Database**   | [MongoDB Atlas](https://www.mongodb.com/)                  | Cloud Database (Contact Submissions)   |
+| **Emails**     | [Web3Forms](https://web3forms.com/)                        | Form Email Notifications               |
 | **Styling**    | [Tailwind CSS v4](https://tailwindcss.com/)                | Utility-first CSS                      |
-| **Animations** | [Framer Motion](https://www.framer.com/motion/)            | Complex Animations                     |
-| **Physics**    | [Matter.js](https://brm.io/matter-js/)                     | 2D Physics Engine (Gravity Background) |
+| **Animations** | [Framer Motion](https://www.framer.com/motion/)            | Complex Animations & Gestures          |
 | **Icons**      | [React Icons](https://react-icons.github.io/react-icons/)  | SVG Icon Library                       |
-| **Routing**    | [React Router](https://reactrouter.com/)                   | Client-side Routing                    |
-| **Scroll**     | [React Scroll](https://www.npmjs.com/package/react-scroll) | Smooth Scrolling                       |
 
 ---
 
@@ -73,6 +74,8 @@ Follow these steps to set up the project locally.
 
 - Node.js (v18 or higher)
 - npm or yarn
+- MongoDB Atlas Account (for database)
+- Web3Forms API Key (for emails)
 
 ### Installation
 
@@ -89,17 +92,26 @@ Follow these steps to set up the project locally.
    npm install
    ```
 
-3. **Start the development server**
+3. **Set up Environment Variables**
+
+   Create a `.env` file in the root directory and add your credentials:
+   ```env
+   WEB3FORMS_ACCESS_KEY="your_web3forms_key_here"
+   MONGODB_URI="mongodb+srv://<username>:<password>@cluster0.mongodb.net/portfolio"
+   ```
+
+4. **Start the development server**
 
    ```bash
    npm run dev
    ```
 
-   The site will be available at `http://localhost:5173`.
+   The site will be available at `http://localhost:3000`.
 
-4. **Build for production**
+5. **Build for production**
    ```bash
    npm run build
+   npm start
    ```
 
 ---
@@ -107,45 +119,31 @@ Follow these steps to set up the project locally.
 ## 📂 Project Structure
 
 ```bash
-src/
-├── assets/                  # Static assets
+Personal-Website/
+├── app/                     # Next.js App Router
+│   ├── api/contact/         # API Route for Contact Form
+│   ├── globals.css          # Global styles & Tailwind imports
+│   ├── layout.jsx           # Root layout and providers
+│   └── page.jsx             # Main homepage assembly
+├── public/                  # Static assets
 │   ├── img/                 # Profile, project screenshots
-│   ├── photography/         # High-res photography images
 │   └── resume/              # PDF Resume files
-├── components/              # React Components
-│   ├── DarkModeToggle.jsx   # Theme switcher component
-│   ├── Footer.jsx           # Site footer
-│   ├── GravityBackground.jsx # Physics-based background
-│   ├── Header.jsx           # Sticky navigation bar
-│   ├── Home.jsx             # Hero section
-│   ├── MagneticButton.jsx   # Hover effect wrapper
-│   ├── PhotographyStack.jsx # Swipeable image stack
-│   ├── Skills.jsx           # Tech stack grid
-│   ├── SplitText.jsx        # Text animation component
-│   ├── Typewriter.jsx       # Typing effect component
-│   └── Work.jsx             # Project showcase
-├── Data/
-│   └── data.jsx             # Centralized content data
-├── App.jsx                  # Main application layout
-├── index.css                # Global styles & Tailwind imports
-└── main.jsx                 # Entry point
+├── src/
+│   ├── components/          # Reusable UI elements
+│   │   ├── layout/          # Header, Footer, Transitions
+│   │   └── ui/              # Buttons, Toggles, Cursors
+│   ├── data/                # Content data (Skills, Projects, Info)
+│   ├── features/            # Feature-based sections
+│   │   ├── about/           # About section
+│   │   ├── contact/         # Contact form
+│   │   ├── experience/      # Timeline and work history
+│   │   ├── home/            # Hero section
+│   │   ├── projects/        # Featured work showcase
+│   │   └── skills/          # Tech stack grid
+│   ├── hooks/               # Custom React hooks
+│   └── lib/                 # Utilities and MongoDB connection
+└── vercel.json              # Vercel deployment configuration
 ```
-
----
-
-## 🧩 Key Components
-
-### `GravityBackground.jsx`
-
-A unique background component that creates falling "tech pills" (React, Node, JS logos) that react to gravity. It uses `Matter.js` to simulate physical collisions and `DeviceOrientation` API to change gravity direction on mobile devices.
-
-### `PhotographyStack.jsx`
-
-An interactive gallery that allows users to swipe through photos. It uses `Framer Motion`'s `useMotionValue` and `useTransform` to calculate rotation and opacity based on drag distance, creating a realistic card-toss effect.
-
-### `MagneticButton.jsx`
-
-A wrapper component that adds a magnetic pull effect to any button or link. As the mouse approaches the element, it moves slightly towards the cursor, creating a sticky, premium feel.
 
 ---
 
@@ -153,44 +151,44 @@ A wrapper component that adds a magnetic pull effect to any button or link. As t
 
 ### Colors
 
-The color palette is defined in `src/index.css` using CSS variables and Tailwind configuration.
+The color palette is defined in `app/globals.css` using CSS variables and Tailwind configuration.
 
 ```css
-/* src/index.css */
-:root {
+/* app/globals.css */
+@theme {
+  --color-primary-50: #e6f3f8;
   --color-primary-500: #006994; /* Sea Blue */
-  --color-accent: #006994;
+  --color-primary-600: #005a7d;
 }
 ```
 
-To change the theme color, simply update the `--color-primary-500` variable.
+To change the theme color, update the `--color-primary-*` variables.
 
 ### Content
 
-Most textual content is managed in `src/Data/data.jsx`. Update this file to change:
+Most textual content is managed in the `src/data/` folder. Update these files to change:
 
-- Project details
-- Skills list
-- About me text
-- Social links
+- `projectData.jsx`: Featured projects and thumbnails
+- `skillData.jsx`: Technical skills and icons
+- `experienceData.js`: Work history and timeline
+- `personalInfo.jsx`: About me text and social links
 
 ### Images
 
-- **Profile Image**: Replace `src/assets/img/profileImage.jpeg`.
-- **Photography**: Add images to `src/assets/photography/` and update the `PHOTO_DATA` array in `PhotographyStack.jsx`.
+- **Profile Image**: Replace `public/img/profileImage.jpeg`.
+- **Project Thumbnails**: Add images to `public/img/` and update paths in `src/data/projectData.jsx`.
+- **Resume**: Replace `public/resume/Usman_Khalid_CV.pdf`.
 
 ---
 
 ## 🚀 Deployment
 
-This project is optimized for deployment on **Vercel**.
+This project is fully configured for deployment on **Vercel** with the included `vercel.json`.
 
 1. Push your code to GitHub.
-2. Import the repository in Vercel.
-3. Vercel will automatically detect Vite and set the build settings:
-   - **Build Command**: `npm run build`
-   - **Output Directory**: `dist`
-4. Click **Deploy**.
+2. Import the repository in [Vercel](https://vercel.com).
+3. Under **Settings > Environment Variables**, add your `MONGODB_URI` and `WEB3FORMS_ACCESS_KEY`.
+4. Click **Deploy**. Vercel will automatically detect the Next.js framework and build the project.
 
 ---
 
@@ -213,8 +211,7 @@ Contributions are welcome! Please feel free to submit a Pull Request.
 - 🔗 [LinkedIn](https://www.linkedin.com/in/usman-khalid-9a2bb72b7/)
 - 🎨 [Behance](https://www.behance.net/Usman2205)
 - 💻 [GitHub](https://github.com/Usmankhalid20)
-- 📧 [Email](mailto:usman@example.com)
 
 ---
 
-_© 2025 Usman Khalid. All rights reserved._
+_© 2026 Usman Khalid. All rights reserved._
