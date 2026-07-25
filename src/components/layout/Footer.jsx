@@ -67,7 +67,7 @@ export default function Footer() {
               Full-Stack MERN Developer crafting digital experiences with code and creativity.
             </p>
             
-            <div className="flex items-center justify-center md:justify-start gap-2 text-sm text-gray-500 dark:text-gray-500 font-medium">
+            {/* <div className="flex items-center justify-center md:justify-start gap-2 text-sm text-gray-500 dark:text-gray-500 font-medium">
               <span>Made with</span>
               <motion.div
                 animate={{ scale: [1, 1.2, 1] }}
@@ -76,7 +76,7 @@ export default function Footer() {
                 <FaHeart className="text-primary-500" />
               </motion.div>
               <span>and React</span>
-            </div>
+            </div> */}
           </motion.div>
 
           {/* Quick Links */}

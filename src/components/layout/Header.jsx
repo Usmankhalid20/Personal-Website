@@ -24,8 +24,8 @@ export default function Header() {
     { name: 'Home', to: 'home' },
     { name: 'About', to: 'about' },
     { name: 'Experience', to: 'experience' },
-    { name: 'Work', to: 'work' },
     { name: 'Skills', to: 'skills' },
+    { name: 'Work', to: 'work' },
     { name: 'Contact', to: 'contact' },
   ];
 
