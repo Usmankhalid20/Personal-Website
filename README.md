@@ -12,8 +12,6 @@
 
   <br />
 
-  ![Portfolio Preview](public/img/PersonalWebsite.png)
-
 </div>
 
 ---
@@ -34,7 +32,7 @@
 
 ## 🌟 Overview
 
-Welcome to my personal developer portfolio! This project was designed from the ground up to be a stunning visual representation of my work as a **Full-Stack MERN Developer**. 
+Welcome to my personal developer portfolio! This project was designed from the ground up to be a stunning visual representation of my work as a **Full-Stack MERN Developer**.
 
 Moving away from standard templates, this portfolio leverages the **Next.js App Router** for lightning-fast server-side rendering, combined with **Framer Motion** for butter-smooth micro-interactions. The design system relies on a sophisticated **Sea Blue (`#006994`) & Pure Black (`#000000`)** color palette, incorporating modern glassmorphism and subtle scroll effects.
 
@@ -43,19 +41,22 @@ Moving away from standard templates, this portfolio leverages the **Next.js App 
 ## 🚀 Key Features
 
 ### 🎨 Premium Design & UI
+
 - **Glassmorphism Elements**: Cards, navigation bars, and overlays feature beautiful frosted glass effects utilizing backdrop-blur.
 - **Responsive Mobile-First Architecture**: 100% fluid design that looks pixel-perfect on mobile devices, tablets, and massive desktop monitors.
 - **Dynamic Theming**: Seamless toggling between Light and Dark modes with automatic persistence in local storage.
 
 ### ✨ Immersive Animations
+
 - **Magnetic UI Elements**: Buttons and key links physically pull towards the user's cursor on hover for a tactile experience.
 - **Orchestrated Scroll Reveals**: Content dynamically fades in, slides up, and staggers into place as the user naturally scrolls down the page.
 - **Interactive Typography**: Character-by-character SplitText reveals and Typewriter effects for high-impact headlines.
 - **Custom Cursor**: A stylized, fluid custom cursor that replaces the default browser pointer and reacts to clickable elements.
 
 ### ⚡ Robust Backend Capabilities
+
 - **Serverless API Routes**: Powered by Next.js API routes for secure backend processing.
-- **Integrated Contact Form**: 
+- **Integrated Contact Form**:
   - Validates user input cleanly on the frontend.
   - Submits data to a secure `/api/contact` endpoint.
   - Sends immediate email notifications using **Web3Forms**.
@@ -83,6 +84,7 @@ graph LR
 ## 🛠 Tech Stack
 
 ### Frontend
+
 - **Framework**: [Next.js (App Router)](https://nextjs.org/)
 - **UI Library**: [React 19](https://react.dev/)
 - **Styling**: [Tailwind CSS v4](https://tailwindcss.com/)
@@ -90,6 +92,7 @@ graph LR
 - **Icons**: [React Icons](https://react-icons.github.io/react-icons/)
 
 ### Backend & Infrastructure
+
 - **Database**: [MongoDB Atlas](https://www.mongodb.com/) + Mongoose
 - **Email Service**: [Web3Forms](https://web3forms.com/)
 - **Hosting/Deployment**: [Vercel](https://vercel.com/)
@@ -110,22 +113,25 @@ Want to run this project on your own local machine? Follow these instructions:
 ### Installation
 
 1. **Clone the repository**
+
    ```bash
    git clone https://github.com/Usmankhalid20/Personal-Website.git
    cd Personal-Website
    ```
 
 2. **Install all dependencies**
+
    ```bash
    npm install
    ```
 
 3. **Configure Environment Variables**
    Create a `.env` file in the root directory. This file is safely ignored by Git. Add your private credentials:
+
    ```env
    # Web3Forms Key for Contact Form Emails
    WEB3FORMS_ACCESS_KEY="your_web3forms_key_here"
-   
+
    # MongoDB Connection String
    MONGODB_URI="mongodb+srv://<username>:<password>@cluster0.mongodb.net/portfolio?retryWrites=true&w=majority"
    ```
@@ -162,12 +168,12 @@ Personal-Website/
 │   │   ├── projectData.jsx  # Portfolio projects
 │   │   └── skillData.jsx    # Tech stack arrays
 │   ├── features/            # Feature-specific isolated components
-│   │   ├── about/           
-│   │   ├── contact/         
-│   │   ├── experience/      
-│   │   ├── home/            
-│   │   ├── projects/        
-│   │   └── skills/          
+│   │   ├── about/
+│   │   ├── contact/
+│   │   ├── experience/
+│   │   ├── home/
+│   │   ├── projects/
+│   │   └── skills/
 │   ├── hooks/               # Custom React hooks (e.g., useReducedMotion)
 │   └── lib/                 # Utility functions and DB connection config
 └── vercel.json              # Specific Vercel build configurations
@@ -202,7 +208,7 @@ This project is fully configured for a 1-click deployment on **Vercel**.
 
 ## 🤝 Contributing
 
-Contributions, issues, and feature requests are always welcome! 
+Contributions, issues, and feature requests are always welcome!
 
 1. Fork the project
 2. Create your Feature Branch (`git checkout -b feature/AmazingFeature`)
@@ -215,7 +221,7 @@ Contributions, issues, and feature requests are always welcome!
 ## 📬 Contact
 
 **Usman Khalid**  
-*Full-Stack MERN Developer*
+_Full-Stack MERN Developer_
 
 - 🔗 **LinkedIn**: [Connect with me](https://www.linkedin.com/in/usman-khalid-9a2bb72b7/)
 - 🎨 **Behance**: [View my design work](https://www.behance.net/Usman2205)
