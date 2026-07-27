@@ -1,205 +1,212 @@
-# ⚡ Modern Developer Portfolio
+<div align="center">
+  <h1>⚡ Usman Khalid | Modern Developer Portfolio</h1>
+  <p>A premium, high-performance portfolio website built with modern web technologies to showcase professional experience, skills, and projects.</p>
 
-[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
-[![Next.js](https://img.shields.io/badge/Next.js-15.0.0-black)](https://nextjs.org/)
-[![React](https://img.shields.io/badge/React-19.0.0-%2361DAFB)](https://react.dev/)
-[![Tailwind CSS](https://img.shields.io/badge/Tailwind-4.0.0-%2338B2AC)](https://tailwindcss.com/)
-[![Framer Motion](https://img.shields.io/badge/Framer_Motion-11.0.0-black)](https://www.framer.com/motion/)
-[![MongoDB](https://img.shields.io/badge/MongoDB-Atlas-%2347A248)](https://www.mongodb.com/)
+  <div>
+    <img src="https://img.shields.io/badge/Next.js-15.0.0-black?style=for-the-badge&logo=next.js&logoColor=white" alt="Next.js" />
+    <img src="https://img.shields.io/badge/React-19.0.0-61DAFB?style=for-the-badge&logo=react&logoColor=black" alt="React" />
+    <img src="https://img.shields.io/badge/Tailwind-4.0.0-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white" alt="Tailwind CSS" />
+    <img src="https://img.shields.io/badge/MongoDB-Atlas-47A248?style=for-the-badge&logo=mongodb&logoColor=white" alt="MongoDB" />
+    <img src="https://img.shields.io/badge/Framer_Motion-11.0.0-black?style=for-the-badge&logo=framer&logoColor=white" alt="Framer Motion" />
+  </div>
 
-> A premium, high-performance portfolio website built with **Next.js (App Router)**, **React 19**, and **Tailwind CSS v4**. Featuring a sophisticated **Sea Blue & Black** aesthetic, smooth **Framer Motion** animations, a fully functional contact form powered by **Web3Forms**, and data persistence with **MongoDB Atlas**.
+  <br />
 
-<!-- ![Portfolio Preview](public/img/PersonalWebsite.png) -->
+  ![Portfolio Preview](public/img/PersonalWebsite.png)
+
+</div>
+
+---
 
 ## 📖 Table of Contents
 
-- [Features](#-features)
+- [Overview](#-overview)
+- [Key Features](#-key-features)
+- [System Architecture](#-system-architecture)
 - [Tech Stack](#-tech-stack)
 - [Getting Started](#-getting-started)
 - [Project Structure](#-project-structure)
-- [Key Components](#-key-components)
 - [Customization](#-customization)
 - [Deployment](#-deployment)
-- [Contributing](#-contributing)
 - [Contact](#-contact)
 
 ---
 
-## 🚀 Features
+## 🌟 Overview
 
-### 🎨 Design & UI
+Welcome to my personal developer portfolio! This project was designed from the ground up to be a stunning visual representation of my work as a **Full-Stack MERN Developer**. 
 
-- **Premium Aesthetic**: A sophisticated "Sea Blue" (`#006994`) accent color paired with a strict **Pure Black** (`#000000`) dark mode.
-- **Glassmorphism**: Modern glass effects on cards and overlays using backdrop filters.
-- **Responsive Layout**: Mobile-first architecture ensuring pixel-perfect rendering on phones, tablets, and desktops.
-- **Dynamic Theme**: Seamless Dark/Light mode toggling with local storage persistence.
+Moving away from standard templates, this portfolio leverages the **Next.js App Router** for lightning-fast server-side rendering, combined with **Framer Motion** for butter-smooth micro-interactions. The design system relies on a sophisticated **Sea Blue (`#006994`) & Pure Black (`#000000`)** color palette, incorporating modern glassmorphism and subtle scroll effects.
 
-### ✨ Animations & Interactivity
+---
 
-- **Scroll Progress & Page Transitions**: Smooth, animated transitions between sections and pages.
-- **Magnetic Buttons**: Interactive buttons that magnetically stick to the cursor movement.
-- **Scroll Reveals**: Elements fade in, slide up, and stagger as you scroll down the page.
-- **Split Text & Typewriter**: Character-by-character text reveal animations for impactful headlines.
-- **Experience Timeline**: A beautifully animated timeline showcasing professional experience.
+## 🚀 Key Features
 
-### ⚡ Performance & Backend
+### 🎨 Premium Design & UI
+- **Glassmorphism Elements**: Cards, navigation bars, and overlays feature beautiful frosted glass effects utilizing backdrop-blur.
+- **Responsive Mobile-First Architecture**: 100% fluid design that looks pixel-perfect on mobile devices, tablets, and massive desktop monitors.
+- **Dynamic Theming**: Seamless toggling between Light and Dark modes with automatic persistence in local storage.
 
-- **Next.js App Router**: Server-side rendering (SSR) and optimized routing for lightning-fast performance.
-- **Web3Forms Integration**: Fully functional contact form that sends email notifications instantly.
-- **MongoDB Atlas**: Securely saves all contact form submissions to a cloud database.
-- **Tailwind v4**: The latest engine for zero-runtime CSS generation.
-- **SEO Optimized**: Semantic HTML5 structure and robust metadata handling.
+### ✨ Immersive Animations
+- **Magnetic UI Elements**: Buttons and key links physically pull towards the user's cursor on hover for a tactile experience.
+- **Orchestrated Scroll Reveals**: Content dynamically fades in, slides up, and staggers into place as the user naturally scrolls down the page.
+- **Interactive Typography**: Character-by-character SplitText reveals and Typewriter effects for high-impact headlines.
+- **Custom Cursor**: A stylized, fluid custom cursor that replaces the default browser pointer and reacts to clickable elements.
+
+### ⚡ Robust Backend Capabilities
+- **Serverless API Routes**: Powered by Next.js API routes for secure backend processing.
+- **Integrated Contact Form**: 
+  - Validates user input cleanly on the frontend.
+  - Submits data to a secure `/api/contact` endpoint.
+  - Sends immediate email notifications using **Web3Forms**.
+  - Persistently logs all inquiries into a **MongoDB Atlas** cloud database.
+
+---
+
+## 🏗 System Architecture
+
+When a user submits a message via the Contact section, the following flow occurs securely on the backend:
+
+```mermaid
+graph LR
+    A[Client UI] -->|POST Request| B(/api/contact Route)
+    B -->|Validate| C{Valid?}
+    C -->|Yes| D[MongoDB Atlas]
+    C -->|Yes| E[Web3Forms API]
+    D --> F[Database Record Created]
+    E --> G[Email Sent to Inbox]
+    F & G --> H[Success Response to Client]
+```
 
 ---
 
 ## 🛠 Tech Stack
 
-| Category       | Technology                                                | Purpose                              |
-| -------------- | --------------------------------------------------------- | ------------------------------------ |
-| **Framework**  | [Next.js](https://nextjs.org/)                            | React Framework (App Router)         |
-| **Core**       | [React 19](https://react.dev/)                            | UI Library                           |
-| **Database**   | [MongoDB Atlas](https://www.mongodb.com/)                 | Cloud Database (Contact Submissions) |
-| **Emails**     | [Web3Forms](https://web3forms.com/)                       | Form Email Notifications             |
-| **Styling**    | [Tailwind CSS v4](https://tailwindcss.com/)               | Utility-first CSS                    |
-| **Animations** | [Framer Motion](https://www.framer.com/motion/)           | Complex Animations & Gestures        |
-| **Icons**      | [React Icons](https://react-icons.github.io/react-icons/) | SVG Icon Library                     |
+### Frontend
+- **Framework**: [Next.js (App Router)](https://nextjs.org/)
+- **UI Library**: [React 19](https://react.dev/)
+- **Styling**: [Tailwind CSS v4](https://tailwindcss.com/)
+- **Animations**: [Framer Motion](https://www.framer.com/motion/)
+- **Icons**: [React Icons](https://react-icons.github.io/react-icons/)
+
+### Backend & Infrastructure
+- **Database**: [MongoDB Atlas](https://www.mongodb.com/) + Mongoose
+- **Email Service**: [Web3Forms](https://web3forms.com/)
+- **Hosting/Deployment**: [Vercel](https://vercel.com/)
 
 ---
 
 ## 🏁 Getting Started
 
-Follow these steps to set up the project locally.
+Want to run this project on your own local machine? Follow these instructions:
 
 ### Prerequisites
 
-- Node.js (v18 or higher)
-- npm or yarn
-- MongoDB Atlas Account (for database)
-- Web3Forms API Key (for emails)
+- Node.js (v18 or higher recommended)
+- npm, yarn, or pnpm
+- A free MongoDB Atlas Account (for the database)
+- A free Web3Forms API Key (for email forwarding)
 
 ### Installation
 
 1. **Clone the repository**
-
    ```bash
    git clone https://github.com/Usmankhalid20/Personal-Website.git
    cd Personal-Website
    ```
 
-2. **Install dependencies**
-
+2. **Install all dependencies**
    ```bash
    npm install
    ```
 
-3. **Set up Environment Variables**
-
-   Create a `.env` file in the root directory and add your credentials:
-
+3. **Configure Environment Variables**
+   Create a `.env` file in the root directory. This file is safely ignored by Git. Add your private credentials:
    ```env
+   # Web3Forms Key for Contact Form Emails
    WEB3FORMS_ACCESS_KEY="your_web3forms_key_here"
-   MONGODB_URI="mongodb+srv://<username>:<password>@cluster0.mongodb.net/portfolio"
+   
+   # MongoDB Connection String
+   MONGODB_URI="mongodb+srv://<username>:<password>@cluster0.mongodb.net/portfolio?retryWrites=true&w=majority"
    ```
 
-4. **Start the development server**
-
+4. **Start the Development Server**
    ```bash
    npm run dev
    ```
-
-   The site will be available at `http://localhost:3000`.
-
-5. **Build for production**
-   ```bash
-   npm run build
-   npm start
-   ```
+   Open [http://localhost:3000](http://localhost:3000) in your browser to view the site.
 
 ---
 
 ## 📂 Project Structure
 
+A clean, modular architecture separating components, features, and data:
+
 ```bash
 Personal-Website/
-├── app/                     # Next.js App Router
-│   ├── api/contact/         # API Route for Contact Form
-│   ├── globals.css          # Global styles & Tailwind imports
-│   ├── layout.jsx           # Root layout and providers
-│   └── page.jsx             # Main homepage assembly
-├── public/                  # Static assets
-│   ├── img/                 # Profile, project screenshots
-│   └── resume/              # PDF Resume files
+├── app/                     # Next.js App Router root
+│   ├── api/contact/         # Serverless API Route for the Contact Form
+│   ├── globals.css          # Global Tailwind and custom CSS variables
+│   ├── layout.jsx           # Root layout containing global Providers
+│   └── page.jsx             # Main homepage orchestrator
+├── public/                  # Public static assets
+│   ├── img/                 # Application images, profile pics, thumbnails
+│   └── resume/              # Downloadable PDF Resume
 ├── src/
-│   ├── components/          # Reusable UI elements
-│   │   ├── layout/          # Header, Footer, Transitions
-│   │   └── ui/              # Buttons, Toggles, Cursors
-│   ├── data/                # Content data (Skills, Projects, Info)
-│   ├── features/            # Feature-based sections
-│   │   ├── about/           # About section
-│   │   ├── contact/         # Contact form
-│   │   ├── experience/      # Timeline and work history
-│   │   ├── home/            # Hero section
-│   │   ├── projects/        # Featured work showcase
-│   │   └── skills/          # Tech stack grid
-│   ├── hooks/               # Custom React hooks
-│   └── lib/                 # Utilities and MongoDB connection
-└── vercel.json              # Vercel deployment configuration
+│   ├── components/          # Global Reusable UI Elements
+│   │   ├── layout/          # Headers, Footers, Page Transitions
+│   │   └── ui/              # Buttons, Custom Cursor, DarkMode Toggles
+│   ├── data/                # Hardcoded application state
+│   │   ├── experienceData.js# Timeline data
+│   │   ├── personalInfo.jsx # Bio and social links
+│   │   ├── projectData.jsx  # Portfolio projects
+│   │   └── skillData.jsx    # Tech stack arrays
+│   ├── features/            # Feature-specific isolated components
+│   │   ├── about/           
+│   │   ├── contact/         
+│   │   ├── experience/      
+│   │   ├── home/            
+│   │   ├── projects/        
+│   │   └── skills/          
+│   ├── hooks/               # Custom React hooks (e.g., useReducedMotion)
+│   └── lib/                 # Utility functions and DB connection config
+└── vercel.json              # Specific Vercel build configurations
 ```
 
 ---
 
-## ⚙️ Customization
+## ⚙️ Customization Guide
 
-### Colors
+Want to fork this and make it your own? Here is where to look:
 
-The color palette is defined in `app/globals.css` using CSS variables and Tailwind configuration.
-
-```css
-/* app/globals.css */
-@theme {
-  --color-primary-50: #e6f3f8;
-  --color-primary-500: #006994; /* Sea Blue */
-  --color-primary-600: #005a7d;
-}
-```
-
-To change the theme color, update the `--color-primary-*` variables.
-
-### Content
-
-Most textual content is managed in the `src/data/` folder. Update these files to change:
-
-- `projectData.jsx`: Featured projects and thumbnails
-- `skillData.jsx`: Technical skills and icons
-- `experienceData.js`: Work history and timeline
-- `personalInfo.jsx`: About me text and social links
-
-### Images
-
-- **Profile Image**: Replace `public/img/profileImage.jpeg`.
-- **Project Thumbnails**: Add images to `public/img/` and update paths in `src/data/projectData.jsx`.
-- **Resume**: Replace `public/resume/Usman_Khalid_CV.pdf`.
+- **Theme Colors**: Open `app/globals.css` and modify the `@theme` block to change the primary accent colors.
+- **Your Resume**: Replace `public/resume/Usman_Khalid_CV.pdf` with your own PDF.
+- **Your Photo**: Replace `public/img/profileImage.jpeg`.
+- **Text & Projects**: Simply edit the files inside `src/data/` (`projectData.jsx`, `skillData.jsx`, etc.) to instantly populate the site with your own work history without touching the complex UI components.
 
 ---
 
 ## 🚀 Deployment
 
-This project is fully configured for deployment on **Vercel** with the included `vercel.json`.
+This project is fully configured for a 1-click deployment on **Vercel**.
 
-1. Push your code to GitHub.
-2. Import the repository in [Vercel](https://vercel.com).
-3. Under **Settings > Environment Variables**, add your `MONGODB_URI` and `WEB3FORMS_ACCESS_KEY`.
-4. Click **Deploy**. Vercel will automatically detect the Next.js framework and build the project.
+1. Commit and push your code to your GitHub repository.
+2. Log into [Vercel](https://vercel.com) and click **Add New Project**.
+3. Import your GitHub repository. Vercel will automatically detect the Next.js framework.
+4. Open the **Environment Variables** tab in Vercel settings and add:
+   - `MONGODB_URI`
+   - `WEB3FORMS_ACCESS_KEY`
+5. Click **Deploy**.
 
 ---
 
 ## 🤝 Contributing
 
-Contributions are welcome! Please feel free to submit a Pull Request.
+Contributions, issues, and feature requests are always welcome! 
 
 1. Fork the project
 2. Create your Feature Branch (`git checkout -b feature/AmazingFeature`)
-3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
+3. Commit your changes (`git commit -m 'feat: Add some AmazingFeature'`)
 4. Push to the Branch (`git push origin feature/AmazingFeature`)
 5. Open a Pull Request
 
@@ -207,12 +214,15 @@ Contributions are welcome! Please feel free to submit a Pull Request.
 
 ## 📬 Contact
 
-**Usman Khalid** - Full-Stack MERN Developer
+**Usman Khalid**  
+*Full-Stack MERN Developer*
 
-- 🔗 [LinkedIn](https://www.linkedin.com/in/usman-khalid-9a2bb72b7/)
-- 🎨 [Behance](https://www.behance.net/Usman2205)
-- 💻 [GitHub](https://github.com/Usmankhalid20)
+- 🔗 **LinkedIn**: [Connect with me](https://www.linkedin.com/in/usman-khalid-9a2bb72b7/)
+- 🎨 **Behance**: [View my design work](https://www.behance.net/Usman2205)
+- 💻 **GitHub**: [Follow my code](https://github.com/Usmankhalid20)
 
 ---
 
-_© 2026 Usman Khalid. All rights reserved._
+<div align="center">
+  <i>Designed and developed with ❤️ by Usman Khalid. © 2026 All rights reserved.</i>
+</div>
