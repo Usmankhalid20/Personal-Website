@@ -1,38 +1,77 @@
 "use client";
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import MagneticButton from "../../components/ui/MagneticButton";
 
 export default function Contact() {
   const [isFormOpen, setIsFormOpen] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [submitStatus, setSubmitStatus] = useState(null); // 'success' or 'error'
-  
+  const [submitStatus, setSubmitStatus] = useState(null); // 'success' | 'error' | null
+  const [errorMessage, setErrorMessage] = useState('');
+  const timeoutRef = useRef(null);
+
   const [formData, setFormData] = useState({
     name: '',
     email: '',
     phone: '',
-    message: ''
+    message: '',
+    b_website: '' // Honeypot field for bot trapping
   });
+
+  // Clean up timeout on unmount
+  useEffect(() => {
+    return () => {
+      if (timeoutRef.current) clearTimeout(timeoutRef.current);
+    };
+  }, []);
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
+    if (submitStatus) {
+      setSubmitStatus(null);
+      setErrorMessage('');
+    }
+  };
+
+  const handleOpenForm = () => {
+    setIsFormOpen(true);
+    setSubmitStatus(null);
+    setErrorMessage('');
+  };
+
+  const handleCloseForm = () => {
+    setIsFormOpen(false);
+    setSubmitStatus(null);
+    setErrorMessage('');
+    if (timeoutRef.current) clearTimeout(timeoutRef.current);
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setIsSubmitting(true);
     setSubmitStatus(null);
+    setErrorMessage('');
+
+    // Honeypot check: If bot filled hidden field, simulate success without executing API requests
+    if (formData.b_website && formData.b_website.trim() !== '') {
+      setIsSubmitting(false);
+      setSubmitStatus('success');
+      setFormData({ name: '', email: '', phone: '', message: '', b_website: '' });
+      setTimeout(() => setIsFormOpen(false), 2000);
+      return;
+    }
 
     const payload = {
-      name: formData.name,
-      email: formData.email,
-      phone: formData.phone,
-      message: formData.message,
+      name: formData.name.trim(),
+      email: formData.email.trim(),
+      phone: formData.phone.trim(),
+      message: formData.message.trim(),
+      honeypot: formData.b_website,
     };
 
     try {
-      const response = await fetch("/api/contact", {
+      // 1. Next.js API Route call (Server validation, rate limiting & MongoDB storage)
+      const apiPromise = fetch("/api/contact", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -41,21 +80,66 @@ export default function Contact() {
         body: JSON.stringify(payload),
       });
 
-      const result = await response.json();
-      if (result.success) {
+      // 2. Direct Web3Forms submission from client (Passes Cloudflare protection & emails recipient)
+      const web3FormsKey = process.env.NEXT_PUBLIC_WEB3FORMS_ACCESS_KEY || "2d1e74ad-b690-4ed6-a77a-c6aeb8d5b761";
+      const web3Promise = fetch("https://api.web3forms.com/submit", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
+        body: JSON.stringify({
+          access_key: web3FormsKey,
+          name: payload.name,
+          email: payload.email,
+          phone: payload.phone || '',
+          message: payload.message,
+          subject: `New Project Inquiry from ${payload.name}`,
+          from_name: payload.name,
+        }),
+      });
+
+      const [apiRes, web3Res] = await Promise.allSettled([apiPromise, web3Promise]);
+
+      let isSuccess = false;
+      let serverErrorMsg = '';
+
+      if (apiRes.status === 'fulfilled') {
+        const apiJson = await apiRes.value.json();
+        if (apiRes.value.ok && apiJson.success) {
+          isSuccess = true;
+        } else {
+          serverErrorMsg = apiJson.message || '';
+        }
+      }
+
+      if (web3Res.status === 'fulfilled') {
+        try {
+          const web3Json = await web3Res.value.json();
+          if (web3Json.success) {
+            isSuccess = true;
+          }
+        } catch (e) {
+          // ignore non-json
+        }
+      }
+
+      if (isSuccess) {
         setSubmitStatus('success');
-        setFormData({ name: '', email: '', phone: '', message: '' });
-        // Close form after 3 seconds on success
-        setTimeout(() => {
+        setFormData({ name: '', email: '', phone: '', message: '', b_website: '' });
+        if (timeoutRef.current) clearTimeout(timeoutRef.current);
+        timeoutRef.current = setTimeout(() => {
           setIsFormOpen(false);
           setSubmitStatus(null);
-        }, 3000);
+        }, 3500);
       } else {
         setSubmitStatus('error');
+        setErrorMessage(serverErrorMsg || 'Failed to send message. Please try again later.');
       }
     } catch (error) {
       console.error("Error submitting form:", error);
       setSubmitStatus('error');
+      setErrorMessage('Network error. Please check your connection and try again.');
     } finally {
       setIsSubmitting(false);
     }
@@ -103,8 +187,8 @@ export default function Contact() {
               >
                 <MagneticButton>
                   <button
-                    onClick={() => setIsFormOpen(true)}
-                    className="inline-flex items-center px-10 py-5 bg-primary-600 text-white text-lg font-bold rounded-xl hover:bg-primary-700 transition-all duration-300"
+                    onClick={handleOpenForm}
+                    className="inline-flex items-center px-10 py-5 bg-primary-600 text-white text-lg font-bold rounded-xl hover:bg-primary-700 transition-all duration-300 shadow-md hover:shadow-lg transform active:scale-95"
                   >
                     Start a Conversation <span className="ml-3">→</span>
                   </button>
@@ -113,13 +197,25 @@ export default function Contact() {
             ) : (
               <motion.form
                 key="form"
-                initial={{ opacity: 0, height: 0 }}
-                animate={{ opacity: 1, height: 'auto' }}
-                exit={{ opacity: 0, height: 0 }}
-                transition={{ duration: 0.5 }}
+                initial={{ opacity: 0, y: 15 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -15 }}
+                transition={{ duration: 0.4 }}
                 onSubmit={handleSubmit}
                 className="max-w-2xl mx-auto text-left space-y-6 mt-8"
               >
+                {/* Honeypot field - invisible to real users, catches automated bots */}
+                <input
+                  type="text"
+                  name="b_website"
+                  value={formData.b_website}
+                  onChange={handleChange}
+                  tabIndex={-1}
+                  autoComplete="off"
+                  style={{ display: 'none', position: 'absolute', left: '-9999px' }}
+                  aria-hidden="true"
+                />
+
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <div>
                     <label htmlFor="name" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Name *</label>
@@ -128,6 +224,7 @@ export default function Contact() {
                       id="name"
                       name="name"
                       required
+                      maxLength={100}
                       value={formData.name}
                       onChange={handleChange}
                       disabled={isSubmitting}
@@ -142,6 +239,7 @@ export default function Contact() {
                       id="email"
                       name="email"
                       required
+                      maxLength={150}
                       value={formData.email}
                       onChange={handleChange}
                       disabled={isSubmitting}
@@ -157,6 +255,7 @@ export default function Contact() {
                     type="tel"
                     id="phone"
                     name="phone"
+                    maxLength={40}
                     value={formData.phone}
                     onChange={handleChange}
                     disabled={isSubmitting}
@@ -171,6 +270,7 @@ export default function Contact() {
                     id="message"
                     name="message"
                     required
+                    maxLength={3000}
                     rows={4}
                     value={formData.message}
                     onChange={handleChange}
@@ -181,20 +281,28 @@ export default function Contact() {
                 </div>
 
                 {submitStatus === 'success' && (
-                  <p className="text-green-600 dark:text-green-400 font-medium text-center">
+                  <motion.div
+                    initial={{ opacity: 0, y: -5 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    className="p-4 bg-green-50 dark:bg-green-950/30 border border-green-200 dark:border-green-800/50 rounded-xl text-green-700 dark:text-green-300 text-center font-medium"
+                  >
                     Message sent successfully! I'll get back to you soon.
-                  </p>
+                  </motion.div>
                 )}
                 {submitStatus === 'error' && (
-                  <p className="text-red-600 dark:text-red-400 font-medium text-center">
-                    Oops! Something went wrong. Please try again later.
-                  </p>
+                  <motion.div
+                    initial={{ opacity: 0, y: -5 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    className="p-4 bg-red-50 dark:bg-red-950/30 border border-red-200 dark:border-red-800/50 rounded-xl text-red-700 dark:text-red-300 text-center font-medium"
+                  >
+                    {errorMessage || 'Oops! Something went wrong. Please try again later.'}
+                  </motion.div>
                 )}
 
                 <div className="flex gap-4 pt-4">
                   <button
                     type="button"
-                    onClick={() => setIsFormOpen(false)}
+                    onClick={handleCloseForm}
                     disabled={isSubmitting}
                     className="flex-1 px-6 py-4 bg-gray-100 dark:bg-gray-800 text-gray-900 dark:text-white font-bold rounded-xl hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors disabled:opacity-50"
                   >
@@ -203,7 +311,7 @@ export default function Contact() {
                   <button
                     type="submit"
                     disabled={isSubmitting}
-                    className="flex-[2] px-6 py-4 bg-primary-600 text-white font-bold rounded-xl hover:bg-primary-700 transition-colors disabled:opacity-50 flex items-center justify-center"
+                    className="flex-[2] px-6 py-4 bg-primary-600 text-white font-bold rounded-xl hover:bg-primary-700 transition-colors disabled:opacity-50 flex items-center justify-center shadow-md"
                   >
                     {isSubmitting ? (
                       <span className="w-6 h-6 border-2 border-white border-t-transparent rounded-full animate-spin"></span>

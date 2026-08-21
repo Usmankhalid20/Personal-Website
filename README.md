@@ -22,6 +22,7 @@
 - [Key Features](#-key-features)
 - [System Architecture](#-system-architecture)
 - [Tech Stack](#-tech-stack)
+- [Security & Anti-Spam](#-security--anti-spam)
 - [Getting Started](#-getting-started)
 - [Project Structure](#-project-structure)
 - [Customization](#-customization)
@@ -53,31 +54,44 @@ Moving away from standard templates, this portfolio leverages the **Next.js App 
 - **Interactive Typography**: Character-by-character SplitText reveals and Typewriter effects for high-impact headlines.
 - **Custom Cursor**: A stylized, fluid custom cursor that replaces the default browser pointer and reacts to clickable elements.
 
-### ⚡ Robust Backend Capabilities
+### ⚡ Robust Backend & Security
 
 - **Serverless API Routes**: Powered by Next.js API routes for secure backend processing.
-- **Integrated Contact Form**:
-  - Validates user input cleanly on the frontend.
-  - Submits data to a secure `/api/contact` endpoint.
-  - Sends immediate email notifications using **Web3Forms**.
-  - Persistently logs all inquiries into a **MongoDB Atlas** cloud database.
+- **Dual-Path Contact Delivery**: Direct client-side Web3Forms integration (bypassing Cloudflare bot blocks) combined with serverless MongoDB logging.
+- **In-Memory Rate Limiting**: Restricts submissions to 5 requests per 10 minutes per IP address to prevent spam and Denial of Service (DoS) attacks.
+- **Honeypot Bot Mitigation**: Traps automated spam crawlers using invisible form input fields.
+- **NoSQL Injection Defense**: Strict input type validation preventing query operator payload manipulation.
 
 ---
 
 ## 🏗 System Architecture
 
-When a user submits a message via the Contact section, the following flow occurs securely on the backend:
+When a user submits a message via the Contact section, the following secure dual-path execution flow occurs:
 
 ```mermaid
-graph LR
-    A[Client UI] -->|POST Request| B(/api/contact Route)
-    B -->|Validate| C{Valid?}
-    C -->|Yes| D[MongoDB Atlas]
-    C -->|Yes| E[Web3Forms API]
-    D --> F[Database Record Created]
-    E --> G[Email Sent to Inbox]
-    F & G --> H[Success Response to Client]
+graph TD
+    A[Client UI Form] -->|Direct Client Fetch| E[Web3Forms API - Email Forwarding]
+    A -->|POST Payload| B[/api/contact API Route]
+    B -->|Check IP Rate Limit| C{IP Exceeded?}
+    C -->|Yes| R[HTTP 429 - Rate Limited]
+    C -->|No| H{Honeypot Filled?}
+    H -->|Yes| S[Silently Discard Bot Submission]
+    H -->|No| V[Validate Types & Character Lengths]
+    V -->|Valid| D[MongoDB Atlas Storage]
+    E & D --> F[Success Response to Client]
 ```
+
+---
+
+## 🔒 Security & Anti-Spam Measures
+
+| Feature | Mechanism | Purpose |
+| :--- | :--- | :--- |
+| **IP Rate Limiting** | Sliding window counter (Max 5 requests / 10 mins) | Protects endpoint from request flooding & DoS attacks |
+| **Honeypot Trap** | Hidden `b_website` input field | Traps automated web crawlers without impacting real users |
+| **Type Validation** | Strict primitive `string` type checking | Blocks NoSQL injection payloads (`{"$gt": ""}`) |
+| **Length Limits** | `name`: 100, `email`: 150, `phone`: 40, `message`: 3000 chars | Prevents memory exhaustion & oversized payloads |
+| **Information Masking** | Internal server error logging | Prevents sensitive stack traces from leaking to clients |
 
 ---
 
@@ -126,11 +140,13 @@ Want to run this project on your own local machine? Follow these instructions:
    ```
 
 3. **Configure Environment Variables**
-   Create a `.env` file in the root directory. This file is safely ignored by Git. Add your private credentials:
+   Create a `.env` file in the root directory. This file is safely ignored by Git. Add your credentials:
 
    ```env
-   # Web3Forms Key for Contact Form Emails
+   # Web3Forms Keys for Contact Form Emails
+   VITE_WEB3FORMS_ACCESS_KEY="your_web3forms_key_here"
    WEB3FORMS_ACCESS_KEY="your_web3forms_key_here"
+   NEXT_PUBLIC_WEB3FORMS_ACCESS_KEY="your_web3forms_key_here"
 
    # MongoDB Connection String
    MONGODB_URI="mongodb+srv://<username>:<password>@cluster0.mongodb.net/portfolio?retryWrites=true&w=majority"
@@ -151,7 +167,7 @@ A clean, modular architecture separating components, features, and data:
 ```bash
 Personal-Website/
 ├── app/                     # Next.js App Router root
-│   ├── api/contact/         # Serverless API Route for the Contact Form
+│   ├── api/contact/         # Serverless API Route with Rate Limiting & Security
 │   ├── globals.css          # Global Tailwind and custom CSS variables
 │   ├── layout.jsx           # Root layout containing global Providers
 │   └── page.jsx             # Main homepage orchestrator
@@ -169,7 +185,7 @@ Personal-Website/
 │   │   └── skillData.jsx    # Tech stack arrays
 │   ├── features/            # Feature-specific isolated components
 │   │   ├── about/
-│   │   ├── contact/
+│   │   ├── contact/         # Contact component with Honeypot & Dual Fetch
 │   │   ├── experience/
 │   │   ├── home/
 │   │   ├── projects/
@@ -202,6 +218,7 @@ This project is fully configured for a 1-click deployment on **Vercel**.
 4. Open the **Environment Variables** tab in Vercel settings and add:
    - `MONGODB_URI`
    - `WEB3FORMS_ACCESS_KEY`
+   - `NEXT_PUBLIC_WEB3FORMS_ACCESS_KEY`
 5. Click **Deploy**.
 
 ---
@@ -232,3 +249,4 @@ _Full-Stack MERN Developer_
 <div align="center">
   <i>Designed and developed with ❤️ by Usman Khalid. © 2026 All rights reserved.</i>
 </div>
+
