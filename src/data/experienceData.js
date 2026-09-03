@@ -1,7 +1,7 @@
 export const experienceData = [
   {
     id: 1,
-    period: "August 27, 2024 — September 27, 2024",
+    period: "August 27, 2025 — September 27, 2025",
     role: "MERN Stack Intern",
     company: "Tech Solutions Pro",
     description: "Completed a 1-month intensive internship focused on full-stack web development.",
@@ -15,7 +15,7 @@ export const experienceData = [
   },
   {
     id: 2,
-    period: "October 2024 — Present",
+    period: "October 2025 — Present",
     role: "Junior MERN Stack Developer",
     company: "Tech Solutions Pro",
     description: "Contributing to the development of full-stack web applications with modern technologies.",
@@ -29,7 +29,7 @@ export const experienceData = [
   },
   {
     id: 3,
-    period: "July 10, 2024 — Present",
+    period: "July 2026 — Present",
     role: "Junior MERN Stack Developer",
     company: "AskSunnah AI",
     description: "Developing and maintaining robust full-stack features for AskSunnah AI.",
